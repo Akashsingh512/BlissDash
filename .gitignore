@@ -31,3 +31,8 @@ dist-ssr
 .env
 *.json
 *.save
+
+# Ignore local secrets
+.env
+*.json
+*.save
