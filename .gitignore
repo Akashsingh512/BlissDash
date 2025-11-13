@@ -7,6 +7,11 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+google-creds.json
+google-creds.json.save
+.env
+
+
 .env
 *.json
 *.save
