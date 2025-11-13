@@ -255,11 +255,19 @@ console.log("✅ Loaded credentials for:", creds.client_email);
         lead.lead_type || '', // Lead Type
       ]];
 
-      const response = await fetch(`${baseUrl}/values/Sheet1!A:U:append?valueInputOption=RAW`, {
-        method: 'POST',
-        headers,
-        body: JSON.stringify({ values }),
-      });
+      // const response = await fetch(`${baseUrl}/values/Sheet1!A:U:append?valueInputOption=RAW`, {
+      //   method: 'POST',
+      //   headers,
+      //   body: JSON.stringify({ values }),
+      // });
+      const response = await fetch(
+  `${baseUrl}/values/Sheet1!A:U:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
+  {
+    method: 'POST',
+    headers,
+    body: JSON.stringify({ values }),
+  }
+);
 
       if (!response.ok) {
         const errorText = await response.text();
