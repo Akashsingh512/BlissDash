@@ -242,9 +242,19 @@ const Index = () => {
     const phoneWithCountry = cleanPhone.startsWith("91") ? cleanPhone : `91${cleanPhone}`;
     
     // Include poster URL if available
-    const posterText = posterUrl ? `\n\nPoster: ${posterUrl}` : '';
-    const text = `${whatsappMessage}${mediaUrl ? ` ${mediaUrl}` : ''}${posterText}`;
-    
+    // const posterText = posterUrl ? `\n\nPoster: ${posterUrl}` : '';
+    // const text = `${whatsappMessage}${mediaUrl ? ` ${mediaUrl}` : ''}${posterText}`;
+ 
+    let text = whatsappMessage;
+
+if (posterUrl) {
+  text += `\n\n📌 Program Poster:\n${posterUrl}`;
+}
+
+if (mediaUrl) {
+  text += `\n\n📎 Additional Media:\n${mediaUrl}`;
+}
+
     const encodedMessage = encodeURIComponent(text);
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     const url = isMobile
@@ -267,6 +277,18 @@ const Index = () => {
             className="bg-black text-white hover:bg-black/90 mt-4"
           >
             Login / Sign Up
+          </Button>
+           <Button
+            onClick={() => window.location.href = "/dashboard"}
+            className="bg-black text-white hover:bg-black/90 mt-4"
+          >
+            Dashboard
+          </Button>
+           <Button
+            onClick={() => window.location.href = "/admin"}
+            className="bg-black text-white hover:bg-black/90 mt-4"
+          >
+            Admin
           </Button>
 
         </div>
