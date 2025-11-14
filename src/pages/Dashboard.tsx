@@ -226,6 +226,9 @@ const Dashboard = () => {
             <LogOut className="mr-2 h-4 w-4" />
             Logout
           </Button>
+          <Button variant="outline" onClick={() => navigate("/")}>
+                        Form
+                      </Button>
         </div>
 
         <Card>
@@ -305,7 +308,9 @@ const Dashboard = () => {
                           >
                             Follow-up
                           </Button>
-                          <Button
+                          
+                        </div>
+                        <Button
                                                         size="sm"
                                                         variant="outline"
                                                         onClick={() => setSelectedLead(lead)}
@@ -314,8 +319,6 @@ const Dashboard = () => {
                                                       >
                                                         View
                                                       </Button>
-                          
-                        </div>
                       </TableCell>
                     </TableRow>
                   ))}
@@ -387,11 +390,15 @@ const Dashboard = () => {
               )}
               <Button onClick={updateStatus}>Update Status</Button>
             </div>
+
+            
           </DialogContent>
         </Dialog>
       </div>
     </div>
   );
 };
+
+
 
 export default Dashboard;

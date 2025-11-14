@@ -325,6 +325,9 @@ const Admin = () => {
             <Button variant="outline" onClick={() => navigate("/analytics")}>
               Analytics
             </Button>
+             <Button variant="outline" onClick={() => navigate("/")}>
+              Form
+            </Button>
             <Button variant="outline" onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               Logout
