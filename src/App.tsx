@@ -10,6 +10,8 @@ import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
 import Analytics from "./pages/Analytics";
 import NotFound from "./pages/NotFound";
+import AdminRoute from "./components/auth/AdminRoute";
+
 
 const queryClient = new QueryClient();
 
@@ -18,11 +20,17 @@ const App = () => (
   <TooltipProvider>
       <Toaster />
       <Sonner />
+      
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/admin" element={ <AdminRoute>
+      <Admin />
+    </AdminRoute>
+  }
+/>
+          {/* <Route path="/admin" element={<Admin />} /> */}
           <Route path="/auth" element={<Auth />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/analytics" element={<Analytics />} />
