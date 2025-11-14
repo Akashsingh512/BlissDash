@@ -279,6 +279,7 @@ const Dashboard = () => {
                           }}
                         >
                           {lead.status || "Set Status"}
+                          
                         </Button>
                       </TableCell>
                       <TableCell>
@@ -304,6 +305,16 @@ const Dashboard = () => {
                           >
                             Follow-up
                           </Button>
+                          <Button
+                                                        size="sm"
+                                                        variant="outline"
+                                                        onClick={() => setSelectedLead(lead)}
+                                                        title="View details & manage"
+                                                        style={{marginRight: "10px"}}
+                                                      >
+                                                        View
+                                                      </Button>
+                          
                         </div>
                       </TableCell>
                     </TableRow>

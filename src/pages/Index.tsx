@@ -275,12 +275,14 @@ if (mediaUrl) {
           <Button
             onClick={() => window.location.href = "/auth"}
             className="bg-black text-white hover:bg-black/90 mt-4"
+            style={{ marginRight: 10 }}
           >
             Login / Sign Up
           </Button>
            <Button
             onClick={() => window.location.href = "/dashboard"}
             className="bg-black text-white hover:bg-black/90 mt-4"
+            style={{ marginRight: 10 }}
           >
             Dashboard
           </Button>

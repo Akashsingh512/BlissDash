@@ -255,7 +255,7 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // ✅ SIGNUP HANDLER
+  // SIGNUP HANDLER
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -293,7 +293,7 @@ const Auth = () => {
     }
   };
 
-  // ✅ LOGIN HANDLER (with user_metadata sync)
+  // LOGIN HANDLER (with user_metadata sync)
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -348,7 +348,7 @@ const Auth = () => {
     }
   };
 
-  // ✅ UI (unchanged)
+  // UI (unchanged)
   return (
     <div className="min-h-screen flex items-center justify-center bg-background p-4">
       <Card className="w-full max-w-md shadow-lg">
