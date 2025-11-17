@@ -138,58 +138,113 @@ const Index = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-       const payload = {
-  ...formData,
-  timestamp: new Date().toISOString(),
-};
-    try {
+//   const handleSubmit = async (e: React.FormEvent) => {
+//     e.preventDefault();
+//     setLoading(true);
+//        const payload = {
+//   ...formData,
+//   timestamp: new Date().toISOString(),
+// };
+//     try {
 
-      const { data, error } = await supabase.functions.invoke("sheets-manager", {
-        body: {
-          action: "submit",
-          lead: formData,
-        },
+//       const { data, error } = await supabase.functions.invoke("sheets-manager", {
+//         body: {
+//           action: "submit",
+//           lead: formData,
+//         },
+//       });
+
+//       if (error) throw error;
+
+//       toast.success("Lead submitted successfully!");
+//       setFormData({
+//         name: "",
+//         phone: "",
+//         comment: "",
+//         location: "",
+//         whoMet: "",
+//         date: "",
+//         lead_type: "",
+//       });
+//       loadDefaultSettings();
+//       fetchRecentLeads();
+//     } 
+//   //   catch (error) {
+//   //     console.error("Error submitting lead:", error);
+//   //     await queueLead(payload);
+//   //     // await queueLead(formData);
+//   //     toast.error("Saved offline — will sync when online");
+//   //     if (navigator.onLine) {
+//   //   await syncOffline();
+//   // }
+//   //     setFormData(prev => ({
+//   //   ...prev,
+//   //   name: "",
+//   //   phone: "",
+//   //   comment: "",
+//   //   whoMet: ""
+//   // }));
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setLoading(true);
+
+  const payload = {
+    ...formData,
+    timestamp: new Date().toISOString(),
+  };
+
+  try {
+    if (navigator.onLine) {
+      const { error } = await supabase.functions.invoke("sheets-manager", {
+        body: { action: "submit", lead: payload },
       });
 
       if (error) throw error;
 
       toast.success("Lead submitted successfully!");
-      setFormData({
-        name: "",
-        phone: "",
-        comment: "",
-        location: "",
-        whoMet: "",
-        date: "",
-        lead_type: "",
-      });
-      loadDefaultSettings();
-      fetchRecentLeads();
-    } catch (error) {
-      console.error("Error submitting lead:", error);
+
+    } else {
       await queueLead(payload);
-      // await queueLead(formData);
       toast.error("Saved offline — will sync when online");
-      if (navigator.onLine) {
-    await syncOffline();
+    }
+
+    setFormData({
+      name: "",
+      phone: "",
+      comment: "",
+      location: formData.location,
+      whoMet: "",
+      date: formData.date,
+      lead_type: "",
+    });
+
+    if (navigator.onLine) {
+      fetchRecentLeads();
+    }
+
+  } catch (error) {
+    console.error("Submit failed:", error);
+
+    await queueLead(payload);
+    toast.error("Saved offline — will sync when online");
+
+    setFormData({
+      name: "",
+      phone: "",
+      comment: "",
+      location: formData.location,
+      whoMet: "",
+      date: formData.date,
+      lead_type: "",
+    });
   }
-      setFormData(prev => ({
-    ...prev,
-    name: "",
-    phone: "",
-    comment: "",
-    whoMet: ""
-  }));
+
+  setLoading(false);
+};
+
 
       // toast.error("Failed to submit lead. Please try again.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const startEdit = (index: number) => {
     setEditingIndex(index);
     setEditData({ ...recentLeads[index] });
