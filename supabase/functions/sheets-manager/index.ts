@@ -229,6 +229,13 @@ console.log("✅ Loaded credentials for:", creds.client_email);
 
     if (action === 'submit') {
       console.log('Submitting new lead:', lead);
+      if (!lead || !String(lead.name || '').trim() || !String(lead.phone || '').trim()) {
+    console.warn('Rejected submit: missing name/phone', JSON.stringify(lead));
+    return new Response(JSON.stringify({ error: 'Invalid lead: name & phone required' }), {
+      status: 400,
+      headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    });
+  }
       
       const timestamp = new Date().toLocaleString('en-US', {
         timeZone: 'UTC',
